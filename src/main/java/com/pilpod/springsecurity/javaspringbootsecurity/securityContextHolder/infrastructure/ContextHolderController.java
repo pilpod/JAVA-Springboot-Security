@@ -28,7 +28,7 @@ public class ContextHolderController {
         logger.info("Is Authenticated {}", auth.isAuthenticated());
 
         Map<String,String> message = new HashMap<>();
-        message.put("message", "Hello world!");
+        message.put("message", "Context Holder");
 
         return ResponseEntity.status(HttpStatus.OK).body(message);
     }

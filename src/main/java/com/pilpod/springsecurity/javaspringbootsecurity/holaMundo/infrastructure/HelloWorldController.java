@@ -19,8 +19,6 @@ public class HelloWorldController {
     @GetMapping(path = "/helloworld")
     public ResponseEntity<?> getMessage() {
 
-        System.out.println("hello");
-
         Map<String,String> message = new HashMap<>();
         message.put("message", "Hello world!");
 

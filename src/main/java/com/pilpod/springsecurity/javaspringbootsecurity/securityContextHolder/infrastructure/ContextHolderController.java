@@ -10,9 +10,10 @@ import org.slf4j.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/v1")
 public class ContextHolderController {

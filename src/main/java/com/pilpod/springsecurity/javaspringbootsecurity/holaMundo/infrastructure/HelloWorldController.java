@@ -9,9 +9,10 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/v1", method = RequestMethod.GET, produces = "application/json")
 public class HelloWorldController {

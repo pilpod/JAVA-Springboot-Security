@@ -24,7 +24,7 @@ public class WebSecurityConfig {
         //     .authorizeHttpRequests(authz -> authz.anyRequest().authenticated())
         //     .httpBasic(withDefaults());
         
-        http
+        http.cors().and()
             .httpBasic(withDefaults())
             .authorizeRequests()
             .antMatchers("/api/v1/helloworld","/api/v1/context-holder","/api/v1/welcome").permitAll()

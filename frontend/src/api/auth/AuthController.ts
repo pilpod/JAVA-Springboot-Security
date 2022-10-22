@@ -12,7 +12,7 @@ export default class AuthController {
         myHeader.append('Content-Type', 'application/json')
         myHeader.append('Authorization', `Basic ${this.auth}`)
 
-        const response = await fetch(this.url + '/admin', {
+        const response = await fetch(this.url + '/private', {
             method: 'GET',
             headers: myHeader,
             redirect: 'follow',

@@ -4,7 +4,7 @@ export default class AuthController {
     private url: String = 'http://localhost:8080/api/v1'
     private auth: String = ""
 
-    async login(username: String, password: String): Promise<any> {
+    async login(username: String, password: String): Promise<Response> {
 
         this.auth = this.encodeB64(username,password)
 
@@ -12,7 +12,7 @@ export default class AuthController {
         myHeader.append('Content-Type', 'application/json')
         myHeader.append('Authorization', `Basic ${this.auth}`)
 
-        const response = await fetch(this.url + '/private', {
+        const response = await fetch(this.url + '/login', {
             method: 'GET',
             headers: myHeader,
             redirect: 'follow',

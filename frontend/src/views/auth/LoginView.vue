@@ -13,14 +13,14 @@ async function login(): Promise<void> {
 
     const authController = new AuthController
     if(username.value && password.value) {
-        const response = await authController.login(username.value,password.value)
+        const response:Response = await authController.login(username.value,password.value)
         const json = await response.json()
-
-        console.log(response.status)
+        const status = response.status
         
-        if (json.message == "Logged") {
+        if (status == 200) {
             store.isAuthenticated = true
             loginResult.value = "Logged successfully"
+            console.log(loginResult.value)
             router.push('admin')
         }
     }

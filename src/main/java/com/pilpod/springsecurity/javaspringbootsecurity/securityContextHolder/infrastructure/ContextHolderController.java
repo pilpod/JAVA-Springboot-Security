@@ -28,6 +28,7 @@ public class ContextHolderController {
 
         Map<String,String> message = new HashMap<>();
         message.put("message", "Context Holder");
+        message.put("role", auth.getAuthorities().iterator().next().toString());
 
         return ResponseEntity.status(HttpStatus.OK).body(message);
     }

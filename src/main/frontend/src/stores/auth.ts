@@ -5,6 +5,7 @@ import { ref, type Ref } from "vue";
 export const useAuthStore = defineStore('auth', () => {
     
     let isAuthenticated: Ref<boolean> = ref(false);
+    const userRole: Ref<String> = ref("");
 
-    return { isAuthenticated }
+    return { isAuthenticated, userRole }
 })

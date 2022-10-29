@@ -2,7 +2,9 @@ package com.pilpod.springsecurity.javaspringbootsecurity.config;
 
 import static org.springframework.security.config.Customizer.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.context.annotation.*;
@@ -37,8 +39,9 @@ public class WebSecurityConfig {
             .httpBasic(withDefaults())
             .formLogin().disable()
             .authorizeRequests()
-            .antMatchers("/api/v1/**").permitAll()
-            .antMatchers("/api/v1/admin","api/v1/login").hasRole("ADMIN")
+            .antMatchers("/api/v1/welcome","/api/v1/helloworld").permitAll()
+            .antMatchers("/api/v1/context-holder").hasRole("USER")
+            .antMatchers("/api/v1/admin").hasRole("ADMIN")
             .anyRequest().authenticated();
 
         return http.build();
@@ -68,8 +71,17 @@ public class WebSecurityConfig {
                             .password(password)
                             .roles("ADMIN")
                             .build();
+
+        UserDetails user2 = User.withUsername("user")
+                                .password(password)
+                                .roles("USER")
+                                .build();
         
-        return new InMemoryUserDetailsManager(user);
+        Collection<UserDetails> users = new ArrayList<>();
+        users.add(user);
+        users.add(user2);
+
+        return new InMemoryUserDetailsManager(users);
     }
 
     

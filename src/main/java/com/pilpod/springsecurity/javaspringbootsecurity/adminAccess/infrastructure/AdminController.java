@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,8 +17,11 @@ public class AdminController {
     
     @GetMapping(value="/login")
     public ResponseEntity<?> access() {
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+
         Map<String,String> json = new HashMap<>();
         json.put("message", "Logged");
+        json.put("role", auth.getAuthorities().iterator().next().toString());
 
         return ResponseEntity.status(HttpStatus.OK).body(json);
     }

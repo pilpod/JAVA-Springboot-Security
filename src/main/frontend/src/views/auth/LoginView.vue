@@ -19,9 +19,14 @@ async function login(): Promise<void> {
         
         if (status == 200) {
             store.isAuthenticated = true
+            store.userRole = json.role
             loginResult.value = "Logged successfully"
-            console.log(loginResult.value)
-            router.push('admin')
+
+            if (store.userRole == "ROLE_USER") {
+                router.push('guess')
+            } else {
+                router.push('admin')
+            }
         }
     }
 }

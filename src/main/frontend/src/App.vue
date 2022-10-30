@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import Logout from './components/auth/Logout.vue';
 import HelloWorld from './components/HelloWorld.vue'
+import { useAuthStore } from './stores/auth';
+
+const store = useAuthStore();
+
 </script>
 
 <template>
@@ -18,10 +23,11 @@ import HelloWorld from './components/HelloWorld.vue'
 
             <nav>
                 <RouterLink to="/">Home</RouterLink>
-                <RouterLink to="/about">About</RouterLink>
-                <RouterLink to="/login">Login</RouterLink>
+                <RouterLink :to="{ name: 'about' }">About</RouterLink>
+                <RouterLink to="/login" v-if="!store.isAuthenticated">Login</RouterLink>
                 <RouterLink to="/guess">Guess</RouterLink>
                 <RouterLink to="/admin">Admin</RouterLink>
+                <Logout v-if="store.isAuthenticated"/>
             </nav>
         </div>
     </header>

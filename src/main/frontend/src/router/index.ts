@@ -45,19 +45,29 @@ const router = createRouter({
     ],
 })
 
-router.beforeEach((to, from, next) => {
-    if (to.matched.some((record) => record.meta.requiresAuth)) {
-        if (useAuthStore().isAuthenticated && useAuthStore().userRole == "ROLE_USER") {
-            next({ name: 'guess'})
-        } else if(useAuthStore().isAuthenticated && useAuthStore().userRole == "ROLE_ADMIN") {
-            next({ name: 'admin'})
-        } else {
-            next({
-                name: 'login',
-            })
+router.beforeEach(async (to, from) => {
+    
+    if (to.meta.requiresAuth && 
+        useAuthStore().isAuthenticated && 
+        useAuthStore().userRole == "ROLE_USER" && 
+        to.name !== 'guess'
+    ) {
+        return { name: 'guess' }
+    }
+    
+    if ( to.meta.requiresAuth && 
+        useAuthStore().isAuthenticated && 
+        useAuthStore().userRole == "ROLE_ADMIN" && 
+        to.name !== 'admin'
+    ) {
+        return { name: 'admin' }
+    }
+
+    if (to.meta.requiresAuth && !useAuthStore().isAuthenticated) {
+        return {
+            path: '/login',
+            query: { redirect: to.fullPath }
         }
-    } else {
-        next()
     }
 })
 
